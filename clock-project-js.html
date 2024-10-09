@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Clock</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="./asserts/favicon.png" />
+    <style>
+        body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        background-color:gray;
+        }
+        .clock{
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .clock::before{
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #fff;
+        }
+        .container{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+        }
+        .hand{
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+        }
+        .hand i{
+            position:absolute;
+            background-color: var(--clr);
+            width: 4px;
+            height: var(--h);
+            border-radius: 8px;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="clock">
+        <img src="./clock.png" alt="">
+        <div style="--clr:rgb(85, 7, 196); --h: 74px" id="hour" class="hand">
+          <i></i>
+        </div>
+        <div style="--clr: white; --h: 84px" id="min" class="hand">
+          <i></i>
+        </div>
+        <div style="--clr: rgb(251, 29, 29); --h: 94px" id="sec" class="hand">
+          <i></i>
+        </div>
+      </div>
+    </div>
+    <script>
+
+        let hr = document.getElementById('hour');
+        let min = document.getElementById('min');
+        let sec = document.getElementById('sec');
+
+        function showTime(){
+            let date = new Date();
+
+            // Getting hour, mins, secs from date
+            let h = date.getHours();
+            let m = date.getMinutes();
+            let s = date.getSeconds();
+
+            let hRotation = 30*h + m/2;
+            let mRotation = 6*m;
+            let sRotation = 6*s;
+
+            hr.style.transform = `rotate(${hRotation}deg)`;
+            min.style.transform = `rotate(${mRotation}deg)`;
+            sec.style.transform = `rotate(${sRotation}deg)`;
+
+        }
+        setInterval(showTime, 1000);
+    </script>
+ </body>
+</html>
